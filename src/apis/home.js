@@ -26,3 +26,14 @@ export function getBannerAPI(){
  export const findHotAPI = () => {
     return  httpInstance('home/hot')
   }
+
+/**
+ * @description: 获取所有商品模块
+ * @param {*}
+ * @return {*}
+ */
+ export const getGoodsAPI = () => {
+    return httpInstance({
+      url: '/home/goods'
+    })
+  }
