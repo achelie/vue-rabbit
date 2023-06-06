@@ -21,7 +21,11 @@ const target = ref(null)
 const {elementX,elementY,isOutside} = useMouseInElement(target)
 const left = ref(0)
 const top = ref(0)
-watch([elementX,elementY],()=>{
+const positionLeft = ref(0)
+const positionTop = ref(0)
+watch([elementX,elementY,isOutside],()=>{
+  if(isOutside.value)return
+  console.log(1);
   if(elementX.value>100&&elementX.value<300){
     left.value = elementX.value -100
   }
@@ -32,6 +36,10 @@ watch([elementX,elementY],()=>{
   if(elementX.value>300){left.value = 200}
   if(elementY.value<100){top.value = 0}
   if(elementY.value>300){top.value = 200}
+
+  positionLeft.value = -left.value*2
+  positionTop.value = -top.value*2
+
 })
 
 </script>
@@ -43,7 +51,7 @@ watch([elementX,elementY],()=>{
     <div class="middle">
       <img :src="imageList[imgIndex]" alt="" ref="target" />
       <!-- 蒙层小滑块 -->
-      <div class="layer" :style="{ left: `${left}px`, top: `${top}px` }"></div>
+      <div class="layer" :style="{ left: `${left}px`, top: `${top}px` }" v-show="!isOutside"></div>
     </div>
     <!-- 小图列表 -->
     <ul class="small">
@@ -54,11 +62,11 @@ watch([elementX,elementY],()=>{
     <!-- 放大镜大图 -->
     <div class="large" :style="[
       {
-        backgroundImage: `url(${imageList[0]})`,
-        backgroundPositionX: `0px`,
-        backgroundPositionY: `0px`,
+        backgroundImage: `url(${imageList[imgIndex]})`,
+        backgroundPositionX: `${positionLeft}px`,
+        backgroundPositionY: `${positionTop}px`,
       },
-    ]" v-show="false"></div>
+    ]" v-show="!isOutside"></div>
   </div>
 </template>
 
