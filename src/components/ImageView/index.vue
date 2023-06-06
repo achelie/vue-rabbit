@@ -1,5 +1,6 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
+import { useMouseInElement } from '@vueuse/core';
 
 
 // 图片列表
@@ -10,11 +11,28 @@ const imageList = [
   "https://yanxuan-item.nosdn.127.net/f93243224dc37674dfca5874fe089c60.jpg",
   "https://yanxuan-item.nosdn.127.net/f881cfe7de9a576aaeea6ee0d1d24823.jpg"
 ]
-
-const imgUrl = ref(0)
+// 图片切换
+const imgIndex = ref(0)
 const enterImg = (i)=>{
-    imgUrl.value = i
+    imgIndex.value = i
 }
+// 滑块移动
+const target = ref(null)
+const {elementX,elementY,isOutside} = useMouseInElement(target)
+const left = ref(0)
+const top = ref(0)
+watch([elementX,elementY],()=>{
+  if(elementX.value>100&&elementX.value<300){
+    left.value = elementX.value -100
+  }
+  if(elementY.value>100&&elementY.value<300){
+    top.value = elementY.value -100
+  }
+  if(elementX.value<100){left.value = 0}
+  if(elementX.value>300){left.value = 200}
+  if(elementY.value<100){top.value = 0}
+  if(elementY.value>300){top.value = 200}
+})
 
 </script>
 
@@ -22,14 +40,14 @@ const enterImg = (i)=>{
 <template>
   <div class="goods-image">
     <!-- 左侧大图-->
-    <div class="middle" ref="target">
-      <img :src="imageList[imgUrl]" alt="" />
+    <div class="middle">
+      <img :src="imageList[imgIndex]" alt="" ref="target" />
       <!-- 蒙层小滑块 -->
-      <div class="layer" :style="{ left: `0px`, top: `0px` }"></div>
+      <div class="layer" :style="{ left: `${left}px`, top: `${top}px` }"></div>
     </div>
     <!-- 小图列表 -->
     <ul class="small">
-      <li v-for="(img, i) in imageList" :key="i" @mouseenter="enterImg(i)" :class="{active:i===imgUrl}" >
+      <li v-for="(img, i) in imageList" :key="i" @mouseenter="enterImg(i)" :class="{active:i===imgIndex}" >
         <img :src="img" alt="" />
       </li>
     </ul>
