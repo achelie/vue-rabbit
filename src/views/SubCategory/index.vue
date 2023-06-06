@@ -20,7 +20,7 @@ onMounted(() => {
 const goodList = ref([])
 const data = ref({
   id:route.params.id,
-  page:'1',
+  page:1,
   pageSize:'20',
   sortField: 'publishTime' 
 })
@@ -36,9 +36,20 @@ onMounted(()=>{
 
 // 分类商品数据获取
 const getCategoryGoods = ()=>{
-  data.value.page = '1'
+  data.value.page = 1
   console.log(data.value);
   getGoodList()
+}
+
+// 无线滚动的实现
+const disabled = ref(false)
+const load = async()=>{
+  data.value.page++
+  const res = await getSubCategoryAPI(data.value)
+  goodList.value = [...goodList.value,...res.result.items]
+  if(res.result.items.length === 0){
+    disabled.value=true
+  }
 }
 
 
@@ -61,7 +72,7 @@ const getCategoryGoods = ()=>{
         <el-tab-pane label="最高人气" name="orderNum"></el-tab-pane>
         <el-tab-pane label="评论最多" name="evaluateNum"></el-tab-pane>
       </el-tabs>
-      <div class="body">
+      <div class="body" v-infinite-scroll="load" :infinite-scroll-disabled="disabled">
          <!-- 商品列表-->
          <GoodItem v-for="i in goodList" :key="i.id" :good="i" ></GoodItem>
       </div>
