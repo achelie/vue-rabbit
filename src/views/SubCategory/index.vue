@@ -27,7 +27,6 @@ const data = ref({
 const getGoodList = async ()=>{
   const res = await getSubCategoryAPI(data.value)
   goodList.value = res.result.items
-  console.log(res.result.items);
 }
 
 onMounted(()=>{
