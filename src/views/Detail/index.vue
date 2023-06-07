@@ -3,8 +3,6 @@ import { getDetail } from '@/apis/detail';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import DetailHot from './components/DetailHot.vue';
-import ImgView from "@/components/ImageView/index.vue"
-import XtxSku from "@/components/XtxSku/index.vue"
 
 // 获取goods数据
 const route = useRoute()
