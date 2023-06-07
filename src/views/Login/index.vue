@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+// 表单的校验
 const form = ref({
     account:'',
     password:'',
@@ -26,7 +27,15 @@ const rules = {
         }
     ]
 }
-
+// 表单的统一校验
+const formRef = ref(null)
+const doLogin = ()=>{
+    formRef.value.validate((valid)=>{
+        if(valid){
+            // do login
+        }
+    })
+}
 
 </script>
 
@@ -52,7 +61,7 @@ const rules = {
         </nav>
         <div class="account-box">
           <div class="form">
-            <el-form label-position="right" label-width="60px" :model="form" :rules="rules"
+            <el-form label-position="right" label-width="60px" :model="form" :rules="rules" ref="formRef"
               status-icon>
               <el-form-item prop="account" label="账户">
                 <el-input v-model="form.account"/>
@@ -65,7 +74,7 @@ const rules = {
                   我已同意隐私条款和服务条款
                 </el-checkbox>
               </el-form-item>
-              <el-button size="large" class="subBtn">点击登录</el-button>
+              <el-button size="large" class="subBtn" @click="doLogin">点击登录</el-button>
             </el-form>
           </div>
         </div>
