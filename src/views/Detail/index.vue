@@ -4,17 +4,22 @@ import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import DetailHot from './components/DetailHot.vue';
 import ImgView from "@/components/ImageView/index.vue"
+import XtxSku from "@/components/XtxSku/index.vue"
 
 // 获取goods数据
 const route = useRoute()
 const goods = ref({})
 const getGoods = async () => {
     const res = await getDetail(route.params.id)
-    // console.log(res.result);
+    console.log(res.result);
     goods.value = res.result
 }
 
 onMounted(() => getGoods())
+// sku数据改变
+const skuChange = (sku)=>{
+    console.log(sku);
+}
 
 </script>
 
@@ -87,7 +92,7 @@ onMounted(() => getGoods())
                                 </dl>
                             </div>
                             <!-- sku组件 -->
-
+                            <XtxSku :goods="goods" @change="skuChange" />
                             <!-- 数据组件 -->
 
                             <!-- 按钮组件 -->
