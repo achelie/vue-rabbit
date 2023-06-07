@@ -68,8 +68,8 @@ const skuChange = (sku)=>{
                         </div>
                         <div class="spec">
                             <!-- 商品信息区 -->
-                            <p class="g-name"> 抓绒保暖，毛毛虫儿童鞋 </p>
-                            <p class="g-desc">好穿 </p>
+                            <p class="g-name"> {{goods.name}} </p>
+                            <p class="g-desc">{{ goods.desc }} </p>
                             <p class="g-price">
                                 <span>{{ goods.oldPrice }}</span>
                                 <span>{{ goods.price }}</span>
