@@ -8,9 +8,13 @@ export const useUserStore = defineStore('user', () => {
         const res = await getUserAPI({ account, password })
         userState.value = res.result
     }
+    const clearUserState = ()=>{
+        userState.value = {}
+    }
     return {
         userState,
-        getUserState
+        getUserState,
+        clearUserState
     }
 }, {
     persist: true,
