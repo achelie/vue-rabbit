@@ -1,15 +1,15 @@
 <script setup>
 import { getDetail } from '@/apis/detail';
 import { onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { onBeforeRouteUpdate, useRoute } from 'vue-router';
 import DetailHot from './components/DetailHot.vue';
 
 // 获取goods数据
 const route = useRoute()
 const goods = ref({})
-const getGoods = async () => {
-    const res = await getDetail(route.params.id)
-    console.log(res.result);
+const getGoods = async (id = route.params.id) => {
+    const res = await getDetail(id)
+    // console.log(res.result);
     goods.value = res.result
 }
 
@@ -18,6 +18,12 @@ onMounted(() => getGoods())
 const skuChange = (sku)=>{
     console.log(sku);
 }
+
+// 解决路由缓存问题
+onBeforeRouteUpdate((to)=>{
+  getGoods(to.params.id)
+  console.log(to);
+})
 
 </script>
 
