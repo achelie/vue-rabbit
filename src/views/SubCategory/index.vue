@@ -36,7 +36,6 @@ onMounted(()=>{
 // 分类商品数据获取
 const getCategoryGoods = ()=>{
   data.value.page = 1
-  console.log(data.value);
   getGoodList()
 }
 
