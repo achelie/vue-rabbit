@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/el-message.css'
 import { useRouter } from 'vue-router';
-import {useUserStore} from '@/stores/user'
+import { useUserStore } from '@/stores/user'
 
 // 表单的校验
 const form = ref({
@@ -55,9 +55,9 @@ const doLogin = ()=>{
     <header class="login-header">
       <div class="container m-top-20">
         <h1 class="logo">
-          <RouterLink to="/">小兔鲜</RouterLink>
+          <RouterLink to="/">温小商</RouterLink>
         </h1>
-        <RouterLink class="entry" to="/">
+        <RouterLink style="background-color: #fff" class="entry" to="/">
           进入网站首页
           <i class="iconfont icon-angle-right"></i>
           <i class="iconfont icon-angle-right"></i>
@@ -67,7 +67,7 @@ const doLogin = ()=>{
     <section class="login-section">
       <div class="wrapper">
         <nav>
-          <a href="javascript:;">账户登录</a>
+          <a href="javascript:;" style="background-color: #fff;">账户登录</a>
         </nav>
         <div class="account-box">
           <div class="form">
@@ -86,6 +86,10 @@ const doLogin = ()=>{
               </el-form-item>
               <el-button size="large" class="subBtn" @click="doLogin">点击登录</el-button>
             </el-form>
+            <div>
+              <RouterLink class="btn-register" to="/register">进入注册页面</RouterLink>
+            </div>
+            
           </div>
         </div>
       </div>
@@ -102,13 +106,26 @@ const doLogin = ()=>{
           <a href="javascript:;">搜索推荐</a>
           <a href="javascript:;">友情链接</a>
         </p>
-        <p>CopyRight &copy; 温小商</p>
       </div>
     </footer>
   </div>
 </template>
 
 <style scoped lang='scss'>
+.btn-register{
+  width: 100px;
+    display: flex;
+    margin: 0 auto;
+
+    &:hover {
+        background-color: #fff;
+    }
+}
+.container {
+  width: 1240px;
+  margin: 0 auto;
+  position: relative;
+}
 .login-header {
   background: #fff;
   border-bottom: 1px solid #e4e4e4;
@@ -147,15 +164,16 @@ const doLogin = ()=>{
 
     i {
       font-size: 14px;
-      color: $xtxColor;
+      color: gold;
       letter-spacing: -5px;
     }
   }
 }
 
 .login-section {
+  min-height: 500px;
   background: url('@/assets/images/login-bg.png') no-repeat center / cover;
-  height: 488px;
+  height: 75vh;
   position: relative;
 
   .wrapper {
@@ -163,7 +181,7 @@ const doLogin = ()=>{
     background: #fff;
     position: absolute;
     left: 50%;
-    top: 54px;
+    top: 128px;
     transform: translate3d(100px, 0, 0);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 
@@ -217,7 +235,7 @@ const doLogin = ()=>{
     text-align: right;
 
     a {
-      color: $xtxColor;
+      color: gold;
 
       i {
         font-size: 14px;
@@ -256,12 +274,12 @@ const doLogin = ()=>{
           width: 100%;
 
           &.error {
-            border-color: $priceColor;
+            border-color: gold;
           }
 
           &.active,
           &:focus {
-            border-color: $xtxColor;
+            border-color: gold;
           }
         }
 
@@ -284,7 +302,7 @@ const doLogin = ()=>{
         position: absolute;
         font-size: 12px;
         line-height: 28px;
-        color: $priceColor;
+        color: gold;
 
         i {
           font-size: 14px;
@@ -306,7 +324,7 @@ const doLogin = ()=>{
       color: #fff;
       text-align: center;
       line-height: 40px;
-      background: $xtxColor;
+      background: gold;
 
       &.disabled {
         background: #cfcdcd;
@@ -330,7 +348,7 @@ const doLogin = ()=>{
 }
 
 .subBtn {
-  background: $xtxColor;
+  background: gold;
   width: 100%;
   color: #fff;
 }

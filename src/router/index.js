@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Login from "@/views/Login/index.vue"
+import Register from "@/views/Register/index.vue"
 import Layout from "@/views/Layout/index.vue"
 import Home from "@/views/Home/index.vue"
 import Category from "@/views/Category/index.vue"
@@ -34,6 +35,10 @@ const router = createRouter({
     {
       path: '/login',
       component: Login
+    },
+    {
+      path:'/register',
+      component:Register
     }
   ],
   // 路由滚动行为定制
