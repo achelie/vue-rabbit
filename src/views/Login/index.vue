@@ -102,7 +102,7 @@ const doLogin = ()=>{
           <a href="javascript:;">搜索推荐</a>
           <a href="javascript:;">友情链接</a>
         </p>
-        <p>CopyRight &copy; 小兔鲜儿</p>
+        <p>CopyRight &copy; 温小商</p>
       </div>
     </footer>
   </div>
